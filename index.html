@@ -476,10 +476,10 @@ h1,h2{margin:0;text-wrap:balance}
   <!-- 6 memories -->
   <section class="scene" id="s6">
     <h2 class="title">A walk down memory lane 📸</h2>
-    <p class="sub">Side me swipe karo. Har photo par tap karke use kholna hai — saari dekhni hain.</p>
+    <p class="sub">Side me swipe karo. Kisi bhi photo par tap karke use bada kar sakti ho.</p>
     <div class="rail" id="rail"></div>
-    <p class="hint" id="memHint">0 / 5 photos dekhi</p>
-    <p style="margin-top:4px;display:none" id="memNext"><button class="btn" data-go="7">Keep going →</button></p>
+    <p class="hint" id="memHint">Jitni chaaho dekho — jab mann kare aage badh jao</p>
+    <p style="margin-top:4px"><button class="btn" data-go="7">Keep going →</button></p>
   </section>
 
   <!-- 7 gift + scratch -->
@@ -1033,7 +1033,6 @@ function buildBalloons(){
 let polas=[], seen=0;
 function buildMemories(){
   const rail=$("#rail"), lb=$("#lb"), N=D.memories.length;
-  $("#memHint").textContent = "0 / "+N+" photos dekhi";
   D.memories.forEach((mem,i)=>{
     const d=document.createElement("button");
     d.className="pola"; d.style.setProperty("--r",(i%2?2.2:-2.4)+"deg");
@@ -1046,10 +1045,10 @@ function buildMemories(){
       $("#lbImg").appendChild(im);
       $("#lbCap").textContent=mem.story;
       lb.classList.add("on"); Music.ping(79,.4);
+      /* photos gated nahi hain — tick sirf yaad dilane ke liye ki kaunsi dekh li */
       if(!d.classList.contains("seen")){
         d.classList.add("seen"); seen++;
-        $("#memHint").textContent = seen+" / "+N+" photos dekhi";
-        if(seen===N){ $("#memHint").style.display="none"; $("#memNext").style.display="block"; }
+        if(seen===N) $("#memHint").textContent = "Saari dekh li 🤍";
       }
     };
     rail.appendChild(d); polas.push(d);
